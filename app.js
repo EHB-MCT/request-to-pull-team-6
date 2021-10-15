@@ -6,9 +6,14 @@ const {
 } = require("socket.io");
 const io = new Server(server);
 
-app.get('/', (req, res) => {
+server.get('/', (req, res) => {
     res.sendFile(__dirname + '/index.html');
 });
+
+server.get('/script.js', function(req, res) {
+    res.sendFile(path.join(__dirname + '/script.js'));
+});
+
 io.on('connection', (socket) => {
     socket.on('chat message', (msg) => {
         console.log('message: ' + msg);
